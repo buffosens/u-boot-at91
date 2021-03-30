@@ -498,7 +498,7 @@ int nand_verify_page_oob(struct mtd_info *mtd, struct mtd_oob_ops *ops,
 
 	free(vops.datbuf);
 
-	printf("This is returning nand_verify_page_oob()\n")
+	printf("This is returning nand_verify_page_oob()\n");
 	return rval ? -EIO : 0;
 }
 
