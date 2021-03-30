@@ -32,26 +32,32 @@ void scc_air_v2_nand_hw_init(void)
 	at91_periph_clk_enable(ATMEL_ID_SMC);
 
 	/* Configure SMC CS3 for NAND/SmartMedia */
-	writel(AT91_SMC_SETUP_NWE(2) | AT91_SMC_SETUP_NCS_WR(1) |
-	       AT91_SMC_SETUP_NRD(2) | AT91_SMC_SETUP_NCS_RD(1),
+	writel(AT91_SMC_SETUP_NWE(2)
+		| AT91_SMC_SETUP_NCS_WR(0)
+		| AT91_SMC_SETUP_NRD(2)
+		| AT91_SMC_SETUP_NCS_RD(0),
 	       &smc->cs[3].setup);
-	writel(AT91_SMC_PULSE_NWE(3) | AT91_SMC_PULSE_NCS_WR(5) |
-	       AT91_SMC_PULSE_NRD(3) | AT91_SMC_PULSE_NCS_RD(5),
+	writel(AT91_SMC_PULSE_NWE(2)
+		| AT91_SMC_PULSE_NCS_WR(5)
+		| AT91_SMC_PULSE_NRD(4)
+		| AT91_SMC_PULSE_NCS_RD(7),
 	       &smc->cs[3].pulse);
-	writel(AT91_SMC_CYCLE_NWE(8) | AT91_SMC_CYCLE_NRD(8),
+	writel(AT91_SMC_CYCLE_NWE(5)
+		| AT91_SMC_CYCLE_NRD(7),
 	       &smc->cs[3].cycle);
-	writel(AT91_SMC_TIMINGS_TCLR(3) | AT91_SMC_TIMINGS_TADL(10) |
-	       AT91_SMC_TIMINGS_TAR(3)  | AT91_SMC_TIMINGS_TRR(4)   |
-	       AT91_SMC_TIMINGS_TWB(5)  | AT91_SMC_TIMINGS_RBNSEL(3)|
-	       AT91_SMC_TIMINGS_NFSEL(1), &smc->cs[3].timings);
-	writel(AT91_SMC_MODE_RM_NRD | AT91_SMC_MODE_WM_NWE |
-	       AT91_SMC_MODE_EXNW_DISABLE |
-#ifdef CONFIG_SYS_NAND_DBW_16
-	       AT91_SMC_MODE_DBW_16 |
-#else /* CONFIG_SYS_NAND_DBW_8 */
-	       AT91_SMC_MODE_DBW_8 |
-#endif
-	       AT91_SMC_MODE_TDF_CYCLE(3),
+	writel(AT91_SMC_TIMINGS_TCLR(3)
+		| AT91_SMC_TIMINGS_TADL(10)
+		| AT91_SMC_TIMINGS_TAR(3)
+		| AT91_SMC_TIMINGS_TRR(4)
+		| AT91_SMC_TIMINGS_TWB(5)
+		| AT91_SMC_TIMINGS_RBNSEL(0)
+		| AT91_SMC_TIMINGS_NFSEL(1),
+			&smc->cs[3].timings);
+	writel(AT91_SMC_MODE_RM_NRD
+		| AT91_SMC_MODE_WM_NWE
+		| AT91_SMC_MODE_EXNW_DISABLE
+	    | AT91_SMC_MODE_DBW_8
+	    | AT91_SMC_MODE_TDF_CYCLE(14),
 	       &smc->cs[3].mode);
 }
 #endif
