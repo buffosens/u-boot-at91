@@ -14,6 +14,9 @@
 #define KERN_DEBUG
 #define KERN_CONT
 
+// Added VoWe:
+#define DEBUG
+
 #define printk(fmt, ...) \
 	printf(fmt, ##__VA_ARGS__)
 
