@@ -498,6 +498,7 @@ int nand_verify_page_oob(struct mtd_info *mtd, struct mtd_oob_ops *ops,
 
 	free(vops.datbuf);
 
+	printf("This is returning nand_verify_page_oob()\n")
 	return rval ? -EIO : 0;
 }
 
@@ -538,7 +539,7 @@ int nand_verify(struct mtd_info *mtd, loff_t ofs, size_t len, u_char *buf)
 	}
 
 	free(verbuf);
-
+	printf("This in nand_verify()\n");
 	return rval ? -EIO : 0;
 }
 
@@ -628,7 +629,7 @@ int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 			return 0;
 
 		*length = 0;
-		printf("Something went wrong while writing !need_skip && !(flags & WITH_DROP_FFS)!");
+		printf("Something went wrong while writing !need_skip && !(flags & WITH_DROP_FFS)!\n");
 		printf("NAND write to offset %llx failed %d\n",
 			offset, rval);
 		return rval;
@@ -670,7 +671,7 @@ int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 		p_buffer += write_size;
 
 		if (rval != 0) {
-			printf("Something went wrong while writing left_to_write > 0!");
+			printf("Something went wrong while writing left_to_write > 0!\n");
 			printf("NAND write to offset %llx failed %d\n",
 				offset, rval);
 			*length -= left_to_write;

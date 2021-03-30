@@ -322,6 +322,7 @@ static int env_nand_load(void)
 	tmp_env2 = (env_t *)malloc(CONFIG_ENV_SIZE);
 	if (tmp_env1 == NULL || tmp_env2 == NULL) {
 		puts("Can't allocate buffers for environment\n");
+		printf("This is env_nand_load()\n");
 		env_set_default("malloc() failed", 0);
 		ret = -EIO;
 		goto done;
@@ -369,6 +370,7 @@ static int env_nand_load(void)
 	ret = readenv(CONFIG_ENV_OFFSET, (u_char *)buf);
 	if (ret) {
 		env_set_default("readenv() failed", 0);
+		printf("This is env_nand_load() again\n");
 		return -EIO;
 	}
 
