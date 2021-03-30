@@ -1004,7 +1004,11 @@ int mtd_write(struct mtd_info *mtd, loff_t to, size_t len, size_t *retlen,
 		return ret;
 	}
 
-	return mtd->_write(mtd, to, len, retlen, buf);
+	int retVal = mtd->_write(mtd, to, len, retlen, buf);
+	if(retVal != 0) {
+		printf("Something went wrong for mtd_write: %d", retVal);
+	}
+	return retVal;
 }
 EXPORT_SYMBOL_GPL(mtd_write);
 

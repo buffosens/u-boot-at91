@@ -619,13 +619,16 @@ int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 	if (!need_skip && !(flags & WITH_DROP_FFS)) {
 		rval = nand_write(mtd, offset, length, buffer);
 
-		if ((flags & WITH_WR_VERIFY) && !rval)
+		if ((flags & WITH_WR_VERIFY) && !rval) {
 			rval = nand_verify(mtd, offset, *length, buffer);
+			printf("nand_verify rval != 0: %d\n", rval);
+		}
 
 		if (rval == 0)
 			return 0;
 
 		*length = 0;
+		printf("Something went wrong while writing !need_skip && !(flags & WITH_DROP_FFS)!");
 		printf("NAND write to offset %llx failed %d\n",
 			offset, rval);
 		return rval;
@@ -667,6 +670,7 @@ int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 		p_buffer += write_size;
 
 		if (rval != 0) {
+			printf("Something went wrong while writing left_to_write > 0!");
 			printf("NAND write to offset %llx failed %d\n",
 				offset, rval);
 			*length -= left_to_write;
@@ -742,6 +746,7 @@ int nand_read_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 			return 0;
 
 		*length = 0;
+		printf("Something went wrong while reading !need_skip!");
 		printf("NAND read from offset %llx failed %d\n",
 			offset, rval);
 		return rval;
@@ -767,6 +772,7 @@ int nand_read_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 
 		rval = nand_read(mtd, offset, &read_length, p_buffer);
 		if (rval && rval != -EUCLEAN) {
+			printf("Something went wrong while reading left_to_read > 0!");
 			printf("NAND read from offset %llx failed %d\n",
 				offset, rval);
 			*length -= left_to_read;
