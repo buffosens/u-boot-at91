@@ -1256,7 +1256,7 @@ int nand_prog_page_end_op(struct nand_chip *chip)
 
 	status = chip->waitfunc(mtd, chip);
 	if (status & NAND_STATUS_FAIL) {
-		printf("This is nand_prog_page_end_op\n");
+		printf("This was an error within nand_prog_page_end_op() with status %d\n", status);
 		return -EIO;
 	}
 
@@ -1296,7 +1296,7 @@ int nand_prog_page_op(struct nand_chip *chip, unsigned int page,
 
 	status = chip->waitfunc(mtd, chip);
 	if (status & NAND_STATUS_FAIL) {
-		printf("This is nand_prog_page_op\n");
+		printf("This was an error within nand_prog_page_op() with status %d\n", status);
 		return -EIO;
 	}
 
@@ -1440,7 +1440,7 @@ int nand_erase_op(struct nand_chip *chip, unsigned int eraseblock)
 		return status;
 
 	if (status & NAND_STATUS_FAIL) {
-		printf("This is nand_erase_op()\n");
+		printf("There was an error with NAND_STATUS_FAIL in nand_erase_op(), status %d.\n", status);
 		return -EIO;
 	}
 
@@ -1473,7 +1473,7 @@ static int nand_set_features_op(struct nand_chip *chip, u8 feature,
 
 	status = chip->waitfunc(mtd, chip);
 	if (status & NAND_STATUS_FAIL) {
-		printf("This is nand_set_features_op()\n");
+		printf("There was an error with NAND_STATUS_FAIL in nand_set_features_op(), status %d.\n", status);
 		return -EIO;
 	}
 
@@ -3229,7 +3229,7 @@ static int nand_do_write_ops(struct mtd_info *mtd, loff_t to,
 
 	/* Check, if it is write protected */
 	if (nand_check_wp(mtd)) {
-		printf("This is nand_do_write_ops()\n");
+		printf("There was an error in nand_check_wp(), write protected?\n");
 		ret = -EIO;
 		goto err_out;
 	}
@@ -3600,9 +3600,6 @@ int nand_erase_nand(struct mtd_info *mtd, struct erase_info *instr,
 	instr->state = MTD_ERASE_DONE;
 
 erase_exit:
-
-	printf("This is goto erase_exit\n");
-
 	ret = instr->state == MTD_ERASE_DONE ? 0 : -EIO;
 
 	/* Deselect and wake up anyone waiting on the device */

@@ -539,7 +539,9 @@ int nand_verify(struct mtd_info *mtd, loff_t ofs, size_t len, u_char *buf)
 	}
 
 	free(verbuf);
-	printf("This in nand_verify()\n");
+	if(rval != 0) {
+		printf("This in nand_verify() with return code -EIO!\n");
+	}
 	return rval ? -EIO : 0;
 }
 
@@ -592,7 +594,7 @@ int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 	 * However, starting at an unaligned offset makes the
 	 * semantics of bad block skipping ambiguous (really,
 	 * you should only start a block skipping access at a
-	 * partition boundary).  So don't try to handle that.
+	 * partition boundary). So don't try to handle that.
 	 */
 	if ((offset & (mtd->writesize - 1)) != 0) {
 		printf("Attempt to write non page-aligned data\n");
@@ -663,15 +665,19 @@ int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
 		rval = nand_write(mtd, offset, &truncated_write_size,
 				p_buffer);
 
-		if ((flags & WITH_WR_VERIFY) && !rval)
+		if ((flags & WITH_WR_VERIFY) && !rval) {
 			rval = nand_verify(mtd, offset,
 				truncated_write_size, p_buffer);
+				if(rval != 0) {
+					printf("Something went wrong while verifying left_to_write!\n");
+				}
+		}
 
 		offset += write_size;
 		p_buffer += write_size;
 
 		if (rval != 0) {
-			printf("Something went wrong while writing left_to_write > 0!\n");
+			printf("Something went wrong while writing left_to_write > 0 with write_size %d!\n", write_size);
 			printf("NAND write to offset %llx failed %d\n",
 				offset, rval);
 			*length -= left_to_write;
