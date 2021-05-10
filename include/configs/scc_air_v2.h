@@ -85,12 +85,3 @@
 #define CONFIG_SYS_NAND_BAD_BLOCK_POS	0x0
 
 #endif
-
-#undef CONFIG_BOOTCOMMAND
-
-#define CONFIG_BOOTCOMMAND	\
-	"run mender_setup;" \
-	"load ${mender_uboot_root} 0x21000000 /boot/at91-sama5d3_xplained.dtb; " \
-	"load ${mender_uboot_root} 0x22000000 /boot/zImage; " \
-	"bootz 0x22000000 - 0x21000000; " \
-	"run mender_try_to_recover"
