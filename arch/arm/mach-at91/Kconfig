@@ -336,6 +336,7 @@ source "board/atmel/sama5d27_som1_ek/Kconfig"
 source "board/atmel/sama5d27_wlsom1_ek/Kconfig"
 source "board/atmel/sama5d2_icp/Kconfig"
 source "board/atmel/sama5d3_xplained/Kconfig"
+source "board/atmel/sama5d3_xplained/Kconfig"
 source "board/atmel/sama5d3xek/Kconfig"
 source "board/atmel/sama5d4_xplained/Kconfig"
 source "board/atmel/sama5d4ek/Kconfig"
@@ -355,6 +356,7 @@ source "board/siemens/taurus/Kconfig"
 source "board/siemens/smartweb/Kconfig"
 source "board/laird/wb45n/Kconfig"
 source "board/laird/wb50n/Kconfig"
+source "board/swarco/scc_air_v2/Kconfig"
 
 config SPL_LDSCRIPT
 	default "arch/arm/mach-at91/arm926ejs/u-boot-spl.lds" if CPU_ARM926EJS
