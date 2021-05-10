@@ -789,6 +789,9 @@ dtb-$(CONFIG_TARGET_SAMA5D3XEK) += \
 dtb-$(CONFIG_TARGET_SAMA5D3_XPLAINED) += \
 	at91-sama5d3_xplained.dtb
 
+dtb-$(CONFIG_TARGET_SCC_AIR_V2) += \
+	at91-sama5d35-scc-air-mk2.dtb
+
 dtb-$(CONFIG_TARGET_SAMA5D4EK) += \
 	at91-sama5d4ek.dtb
 
