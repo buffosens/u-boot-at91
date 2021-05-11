@@ -2,8 +2,6 @@
 /*
  * Copyright (C) 2014 Atmel Corporation
  *		      Bo Shen <voice.shen@atmel.com>
- * Copyright (C) 2021 Swarco Traffic Systems
- *		      Volker Weber <volker.weber@swarco.de>
  */
 
 #include <common.h>
@@ -18,6 +16,7 @@
 #include <debug_uart.h>
 #include <spl.h>
 #include <asm/arch/atmel_mpddrc.h>
+#include <asm/arch/at91_ddrsdrc.h>
 #include <asm/arch/at91_wdt.h>
 
 DECLARE_GLOBAL_DATA_PTR;
@@ -87,7 +86,7 @@ void board_debug_uart_init(void)
 #ifdef CONFIG_BOARD_LATE_INIT
 int board_late_init(void)
 {
-	at91_pda_detect();
+	// at91_pda_detect();
 	return 0;
 }
 #endif
