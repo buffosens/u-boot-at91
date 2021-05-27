@@ -378,8 +378,8 @@
 			nand-on-flash-bbt;
 			status = "okay";
 
-			bootloader@0 {
-				label = "bootloader";
+			u-boot@0 {
+				label = "u-boot";
 				reg = <0x00000000 0x00100000>;
 			};
 
@@ -389,8 +389,8 @@
 			 * in the devicetree binding docs, but it works. With
 			 * this you don't need separate .dtb files for
 			 * different NAND flash sizes. */
-			ubi0@100000 {
-				label = "ubi0";
+			ubi@100000 {
+				label = "ubi";
 				reg = <0x00100000 0x00000000>;	/* MTDPART_SIZ_FULL */
 			};
 		};
