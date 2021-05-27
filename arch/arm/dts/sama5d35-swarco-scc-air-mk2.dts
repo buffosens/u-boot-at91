@@ -383,15 +383,9 @@
 				reg = <0x00000000 0x00100000>;
 			};
 
-			/* mtd1: The rest (120/248/504 MB) for UBI.
-			 *
-			 * The magic value MTDPART_SIZ_FULL (0) isn't mentioned
-			 * in the devicetree binding docs, but it works. With
-			 * this you don't need separate .dtb files for
-			 * different NAND flash sizes. */
 			ubi@100000 {
 				label = "ubi";
-				reg = <0x00100000 0x00000000>;	/* MTDPART_SIZ_FULL */
+				reg = <0x00100000 0x1FF00000>;
 			};
 		};
 	}; /* ahb END */
