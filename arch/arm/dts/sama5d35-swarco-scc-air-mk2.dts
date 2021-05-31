@@ -381,6 +381,9 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 			atmel,rb = <0>;
+			atmel,has-pmecc; // new
+			atmel,pmecc-cap = <8>; // new
+			atmel,pmecc-sector-size = <512>; // new
 			nand-bus-width = <8>; // 8 or 16 bus width if not present 8
 			nand-ecc-mode = "hw"; // String, operation mode of the NAND ecc mode. Supported values are: "none", "soft", "hw", "hw_syndrome", "hw_oob_first", "on-die". Deprecated values: "soft_bch": use "soft" and nand-ecc-algo instead
 			nand-ecc-strength = <8>; // integer representing the number of bits to correct per ECC step.
