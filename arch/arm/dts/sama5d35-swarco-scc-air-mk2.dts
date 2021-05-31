@@ -367,7 +367,7 @@
 			status = "okay";
 		};
 
-		/ * ECC settings must match with the bootloader. */
+		/* ECC settings must match with the bootloader. */
 		nand0: nand@60000000 {
 			//nand-bus-width = <8>;
 			//nand-ecc-mode = "hw";
