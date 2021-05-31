@@ -367,15 +367,26 @@
 			status = "okay";
 		};
 
-		/* 128/256/512 MB NAND flash.
-		 * ECC settings must match with the bootloader. */
+		/ * ECC settings must match with the bootloader. */
 		nand0: nand@60000000 {
-			nand-bus-width = <8>;
-			nand-ecc-mode = "hw";
-			atmel,has-pmecc;
-			atmel,pmecc-cap = <8>;
-			atmel,pmecc-sector-size = <512>;
-			nand-on-flash-bbt;
+			//nand-bus-width = <8>;
+			//nand-ecc-mode = "hw";
+			//atmel,has-pmecc;
+			//atmel,pmecc-cap = <8>;
+			//atmel,pmecc-sector-size = <512>; // sector size for ECC computation. Supported values are: 512, 1024.
+			//nand-on-flash-bbt;
+			//status = "okay";
+
+			reg = <0x3 0x0 0x2>;
+			#address-cells = <1>;
+			#size-cells = <1>;
+			atmel,rb = <0>;
+			nand-bus-width = <8>; // 8 or 16 bus width if not present 8
+			nand-ecc-mode = "hw"; // String, operation mode of the NAND ecc mode. Supported values are: "none", "soft", "hw", "hw_syndrome", "hw_oob_first", "on-die". Deprecated values: "soft_bch": use "soft" and nand-ecc-algo instead
+			nand-ecc-strength = <8>; // integer representing the number of bits to correct per ECC step.
+			nand-ecc-step-size = <512>; // integer representing the number of data bytes that are covered by a single ECC step.
+			nand-on-flash-bbt; // boolean to enable on flash bbt option if not present fal
+			label = "atmel_nand";
 			status = "okay";
 
 			u-boot@0 {
