@@ -65,6 +65,12 @@
 #define CONFIG_SYS_SPL_MALLOC_START	0x20080000
 #define CONFIG_SYS_SPL_MALLOC_SIZE	0x80000
 
+/* VoWe for SCC-Air-v2 */
+#define CONFIG_EXTRA_ENV_SETTINGS					\
+			"kernel_addr_r=0x22000000\0"			\
+			"fdt_addr_r=0x21000000\0"			\
+			BOOTENV
+
 /* size of u-boot.bin to load */
 #define CONFIG_SYS_MONITOR_LEN		(2 * SZ_512K)
 
