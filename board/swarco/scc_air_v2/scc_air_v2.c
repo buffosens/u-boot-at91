@@ -30,7 +30,7 @@ void scc_air_v2_nand_hw_init(void)
 
 	at91_periph_clk_enable(ATMEL_ID_SMC);
 
-	/* Configure SMC CS3 for NAND/SmartMedia */
+	 /* Configure timings for NAND on chip select NCS3 */
 	writel(AT91_SMC_SETUP_NWE(2)
 		| AT91_SMC_SETUP_NCS_WR(0)
 		| AT91_SMC_SETUP_NRD(2)
@@ -49,7 +49,7 @@ void scc_air_v2_nand_hw_init(void)
 		| AT91_SMC_TIMINGS_TAR(3)
 		| AT91_SMC_TIMINGS_TRR(4)
 		| AT91_SMC_TIMINGS_TWB(5)
-		| AT91_SMC_TIMINGS_RBNSEL(0)
+		| AT91_SMC_TIMINGS_RBNSEL(3)
 		| AT91_SMC_TIMINGS_NFSEL(1),
 			&smc->cs[3].timings);
 	writel(AT91_SMC_MODE_RM_NRD
