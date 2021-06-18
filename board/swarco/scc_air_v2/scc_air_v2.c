@@ -30,6 +30,19 @@ void scc_air_v2_nand_hw_init(void)
 
 	at91_periph_clk_enable(ATMEL_ID_SMC);
 
+	/* Periph A, not B/C/D */
+ 	at91_pio3_set_a_periph(AT91_PIO_PORTE, 21, 0);
+ 	at91_pio3_set_a_periph(AT91_PIO_PORTE, 22, 0);
+	/* Periph, not PIO */
+ 	at91_set_a_periph(AT91_PIO_PORTE, 21, 0);
+ 	at91_set_a_periph(AT91_PIO_PORTE, 22, 0);
+	/* Disable pullup */
+ 	at91_pio3_set_pio_pullup(AT91_PIO_PORTE, 21, 0);
+	at91_pio3_set_pio_pullup(AT91_PIO_PORTE, 22, 0);
+	/* Disable pulldown */
+	at91_pio3_set_pio_pulldown(AT91_PIO_PORTE, 21, 0);
+	at91_pio3_set_pio_pulldown(AT91_PIO_PORTE, 22, 0);
+
 	 /* Configure timings for NAND on chip select NCS3 */
 	writel(AT91_SMC_SETUP_NWE(2)
 		| AT91_SMC_SETUP_NCS_WR(0)
