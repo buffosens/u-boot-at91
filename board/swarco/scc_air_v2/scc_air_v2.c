@@ -31,8 +31,8 @@ void scc_air_v2_nand_hw_init(void)
 	at91_periph_clk_enable(ATMEL_ID_SMC);
 
 	/* Periph A, not B/C/D */
- 	at91_pio3_set_a_periph(AT91_PIO_PORTE, 21, 0);
- 	at91_pio3_set_a_periph(AT91_PIO_PORTE, 22, 0);
+ 	at91_pio3_set_a_periph(AT91_PIO_PORTE, 21, 1);
+ 	at91_pio3_set_a_periph(AT91_PIO_PORTE, 22, 1);
 	/* Periph, not PIO */
  	at91_set_a_periph(AT91_PIO_PORTE, 21, 1);
  	at91_set_a_periph(AT91_PIO_PORTE, 22, 1);
